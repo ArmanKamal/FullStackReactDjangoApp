@@ -9,10 +9,11 @@ class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(max_length=200)
     first_name = serializers.CharField(max_length=255,min_length=2)
     last_name = serializers.CharField(max_length=255,min_length=2)
+    is_active = serializers.BooleanField(default=True)
 
     class Meta:
         model = User
-        fields = ['username','first_name','last_name','email','password']
+        fields = ['username','first_name','last_name','email','password','is_active']
 
     def validate(self, attrs):
         if User.objects.filter(email=attrs['email']).exists():
